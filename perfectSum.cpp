@@ -42,8 +42,9 @@ int solve(int arr[], int index, int sum, int n, vector<vector<int>> &dp)
     if (dp[index][sum] != -1)
         return dp[index][sum];
 
-    int ans = solve(arr, index + 1, sum, n, dp);
-    ans += solve(arr, index + 1, sum - arr[index], n, dp);
+    int ans1 = solve(arr, index + 1, sum, n, dp);
+    int ans2 = solve(arr, index + 1, sum - arr[index], n, dp);
+    int ans = ans1 + ans2;
     dp[index][sum] = ans % mod;
     return dp[index][sum];
 }
