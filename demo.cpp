@@ -25,25 +25,19 @@ public:
     }
 };
 
-
-int solve(vector<int>&arr, int index , int target , vector<vector<int>>dp){
-    if(target == 0){
-        return true;
+int helper(vector<int>&arr , int n , int i , int prev){
+    if(i == n)
+        return 0;
+    int notTake = helper(arr, n, i + 1, prev);
+    int take = INT_MIN;
+    if(prev < arr[i]){
+        take = 1+helper(arr, n, i + 1, arr[i]);
     }
-    if(index == 0){
-        return arr[index] == target;
-    }
+    return max(notTake, take);
+}
 
-    if(dp[index][target] != -1)
-        return dp[index][target];
-
-
-    int notTake = solve(arr, index - 1, target ,dp);
-    int take = false;
-    if(target >= arr[index]){
-        take = solve(arr, index - 1, target-arr[index] , dp);
-    }
-    return dp[index][target] = take | notTake;
+int solve(vector<int>&arr , int n){
+    return helper(arr, n, 0, 0);
 }
 
 int32_t main()
@@ -51,12 +45,8 @@ int32_t main()
     int n;
     cin >> n;
     vector<int> arr(n);
-    for (auto &it : arr)
-    {
+    for(auto &it : arr){
         cin >> it;
     }
-    int target;
-    cin >> target;
-    vector<vector<int>> dp(n , vector<int>(target+1 , -1));
-    cout << solve(arr, n-1, target , dp);
+    cout<<solve(arr, n);
 }
