@@ -1,3 +1,2 @@
-6 7
-ezupkr
-ubmrapg
+3 9
+2 3 5

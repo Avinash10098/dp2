@@ -25,43 +25,38 @@ public:
     }
 };
 
-int f(int index, int t, vector<int> &arr)
+int solve(int target, vector<int> &arr, vector<int> &dp)
 {
-    if (index == 0)
+    if (target == 0)
     {
-        // if(t % arr[index] == 0){
-        //     return t / arr[index];
-        // }
-        return (t % arr[index] == 0);
+        return 1;
     }
-
-    // if (dp[index][t] != -1)
-    // {
-    //     return dp[index][t];
-    // }
-
-    int notTake = 0 + f(index - 1, t, arr);
-    int take = 0;
-    if (arr[index] <= t)
+    if (target < 0)
     {
-        take = 1+f(index, t - arr[index], arr);
+        return 0;
     }
-    return take + notTake;
-}
-
-int solve(int n , int t , vector<int>&arr){
-    return f(n - 1, t, arr);
+    int ans = 0;
+    if (dp[target] != -1)
+    {
+        return dp[target];
+    }
+    for (int i = 0; i < arr.size(); i++)
+    {
+        ans += solve(target - arr[i], arr, dp);
+        dp[target] = ans % mod;
+    }
+    return dp[target];
 }
 
 int32_t main()
 {
-    int n, t;
-    cin >> n >> t;
+    int n, target;
+    cin >> n >> target;
     vector<int> arr(n);
     for (auto &it : arr)
     {
         cin >> it;
     }
-    cout << solve(n, t, arr);
-    return 0;
+    vector<int> dp(target + 1, -1);
+    cout << solve(target, arr, dp) << endl;
 }
