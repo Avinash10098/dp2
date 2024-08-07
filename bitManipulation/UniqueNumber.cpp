@@ -27,29 +27,16 @@ public:
 
 int32_t main()
 {
-    int t;
-    cin >> t;
-    while(t--){
-        int n, y;
-        cin >> n >> y;
-        vector<int> arr(n);
-        for (auto &it : arr)
-        {
-            cin >> it;
-        }
+    int n;
+    cin >> n;
+    vector<int> arr(n);
+    for(auto &it : arr)
+        cin >> it;
 
-        int OR = arr[0];
-        for (int i = 1; i < n; i++)
-        {
-            OR = OR | arr[i];
-        }
-        int ans = y - OR;
-        if ((OR | ans) == y)
-            cout << ans << endl;
-        else
-        {
-            cout << -1 << endl;
-        }
+    int xr = arr[0];
+    for (int i = 1; i < n; i++){
+        xr = xr^arr[i];
     }
-    
+    cout << xr << endl;
+    return 0;
 }

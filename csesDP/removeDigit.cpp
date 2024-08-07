@@ -25,31 +25,26 @@ public:
     }
 };
 
+int solve(int n){
+
+    if(n >= 0 && n <= 9){
+        return 1;
+    }
+
+    string s = to_string(n);
+    int ans = 1e7;
+    for(int i = 0 ; i < s.size() ; i++){
+        int t = s[i] - 48;
+        cout << t << endl;
+        ans = min(ans , solve(n - t) + 1);
+    }
+    return ans;
+}
+
 int32_t main()
 {
-    int t;
-    cin >> t;
-    while(t--){
-        int n, y;
-        cin >> n >> y;
-        vector<int> arr(n);
-        for (auto &it : arr)
-        {
-            cin >> it;
-        }
-
-        int OR = arr[0];
-        for (int i = 1; i < n; i++)
-        {
-            OR = OR | arr[i];
-        }
-        int ans = y - OR;
-        if ((OR | ans) == y)
-            cout << ans << endl;
-        else
-        {
-            cout << -1 << endl;
-        }
-    }
-    
+    int n;
+    cin >> n;
+    cout<<solve(n);
+    return 0;
 }

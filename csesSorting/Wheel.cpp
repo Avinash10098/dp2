@@ -27,29 +27,27 @@ public:
 
 int32_t main()
 {
-    int t;
-    cin >> t;
-    while(t--){
-        int n, y;
-        cin >> n >> y;
-        vector<int> arr(n);
-        for (auto &it : arr)
-        {
-            cin >> it;
-        }
+    int n, w;
+    cin >> n >> w;
+    vector<int> arr(n);
+    for(auto &it :arr){
+        cin >> it;
+    }
+    int cnt = 0;
 
-        int OR = arr[0];
-        for (int i = 1; i < n; i++)
-        {
-            OR = OR | arr[i];
-        }
-        int ans = y - OR;
-        if ((OR | ans) == y)
-            cout << ans << endl;
-        else
-        {
-            cout << -1 << endl;
+    sort(all(arr));
+    int i = 0, j = n - 1;
+    while(i <= j){
+        if(arr[i]+arr[j] <= w){
+            cnt++;
+            i++;
+            j--;
+        }else{
+            cnt++;
+            j--;
         }
     }
-    
+    cout << cnt << endl;
+
+    return 0;
 }

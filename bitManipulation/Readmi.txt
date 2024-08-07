@@ -1,0 +1,89 @@
+a << b is nothing but a * 2 ^ b; << left  shift
+
+a >> b is nothing but a / 2 ^ b ; << right shift
+
+XOR : 
+a ^ a = 0; a is the number;
+1^1 = 1;
+0^0 = 0;
+0^1 = 0;
+1^0 = 0;
+
+NOT : (Flip the bits)
+~0 = 1;
+~1 = 0;
+
+Dont use xor word;
+
+
+HOW to GET 00001111111 -> lost of 1 at the end
+
+ans :  2 ^ i - 1 => (1 << i) - 1;
+
+To count the set bit::::
+----------------------
+cout<<__biltin_popcount(n);
+
+Binary string to decimal::::
+----------------------------
+string s = "1111"
+cout<<stoi(s , 0 , 2) -> 15;
+
+decimal to Binary conversion
+
+13 -> 1101
+extract the last bit = 1 at index 0
+
+last_bit    p   ans
+1         * 1 = 1;
+0         * 10 = 0;
+1         * 100 = 100;
+1         * 1000 = 1000
+
+1 + 0 + 100 + 1000 -> 101 + 1000 => 1101 ; 
+
+
+Q . find unique no2;
+
+1^2^1^3^2^4 ---> 3^4 = 7  -> 0111
+here the first set bit at pos = 1;
+take all the no that has set bit at pos = 1;
+here [1,1,3] => 0001 , 0001 , 0011 in all no there are first bit is 1;
+now xor of all the element which is equal to 3;
+now a ^ b = 7; ---> xor of all the element;
+now we get a = 3;
+b = 7 ^ a (here a = 3);
+b = 7^3 --> 4;
+
+[in this way we can find the two unique no ]
+
+Q unique no 3 , 
+your given array [3 3 2 1 1 1 3] 
+your task is to find the unique one that is 2 here
+
+for sure you know that xor will not work , right
+but you know every no occuring 3 time but there is one no that occuring
+only once
+
+3n rem and 3n + 1 is that culprit
+
+ok , lets thik bit vise
+
+3 -> 0011
+3 -> 0011
+2 -> 0010
+1 -> 0001
+1 -> 0001
+1 -> 0001
+3 -> 0011    
+----------
+a -> 0046   basically sum of all last bit;
+now % with 3 we get
+
+a -> 0 0 4 6
+6 % 3 = 0
+4 % 3 = 1
+0 % 3 = 0
+0 % 3 = 0
+
+so it is basically 0100 -> 2 and our ans is also 2
